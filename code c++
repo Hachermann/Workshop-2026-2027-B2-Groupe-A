@@ -1,0 +1,40 @@
+#include <Servo.h>
+
+Servo servo;
+const int brocheEmetteurLaser = 2;
+const int brocheRecepteurLaser = 5;
+const int Ledvert = 4; 
+const int Ledrouge = A1; 
+
+
+void setup() {
+  pinMode(brocheEmetteurLaser, OUTPUT);
+  pinMode(brocheRecepteurLaser, INPUT_PULLUP); 
+  digitalWrite(brocheEmetteurLaser, HIGH); 
+  pinMode(Ledvert, OUTPUT);
+  pinMode(Ledrouge, OUTPUT);
+  digitalWrite(Ledrouge, HIGH); 
+  digitalWrite(Ledvert, HIGH); 
+  servo.attach(3);
+  servo.write(0); 
+  pinMode(buzzer, OUTPUT);
+  Serial.begin(9600); /
+
+}
+
+void loop() {
+  
+  int etatLaser = digitalRead(brocheRecepteurLaser);
+   
+  if (etatLaser == LOW){  
+    servo.write(0);
+    digitalWrite(Ledvert, HIGH); 
+    digitalWrite(Ledrouge, LOW);
+   
+  }else{
+  servo.write(180); 
+  digitalWrite(Ledrouge,HIGH); 
+  digitalWrite(Ledvert, LOW);      
+
+  }
+} 
